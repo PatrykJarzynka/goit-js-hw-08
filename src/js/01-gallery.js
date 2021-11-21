@@ -9,47 +9,24 @@ const gallery = document.querySelector('.gallery');
 
 let array = [];
 galleryItems.forEach(element => {
-  //tworzenie kontenera na poszczególne elementy
-  const item = document.createElement('div');
-  item.classList.add('gallery__item');
-  //tworzenie linku i łączenie z kontenerem
+  //tworzenie linku
   const link = document.createElement('a');
-  link.classList.add('gallery__link');
+  link.classList.add('gallery__item');
   link.href = element.original;
-  item.append(link);
   //tworzenie obrazka i łączenie z linkiem
   const img = document.createElement('img');
   img.classList.add('gallery__image');
   img.src = element.preview;
-  img.dataset.source = element.original;
   img.alt = element.description;
   link.append(img);
   //wrzucenie całości do tablicy
-  array.push(item);
+  array.push(link);
 });
 
 gallery.append(...array);
 
-const imgPicker = event => {
-  event.preventDefault();
-  if (event.target.nodeName !== 'IMG') return;
-  const instance = basicLightbox.create(
-    `<div class="modal">
-        <img src=${event.target.src} >;
-    </div>`,
-    {
-      onShow: instance => {
-        instance.element().querySelector('img').src = event.target.dataset.source;
-      },
-    },
-  );
-  instance.show();
-  if (instance.show()) {
-    document.addEventListener('keydown', e => {
-      if (e.code === 'Escape') instance.close();
-    });
-  }
-};
-
-gallery.addEventListener('click', imgPicker);
+var lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 //console.log(galleryItems);
