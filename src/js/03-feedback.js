@@ -6,9 +6,9 @@ let btn = document.querySelector('button');
 
 let storage = {};
 const checkInput = throttle(event => {
-    storage[event.target.attributes[0].textContent] = event.target.value;
-    localStorage.setItem('feedback-form-state', JSON.stringify(storage));
-},500);
+  storage[event.target.attributes[0].textContent] = event.target.value;
+  localStorage.setItem('feedback-form-state', JSON.stringify(storage));
+}, 500);
 
 email.addEventListener('input', checkInput);
 text.addEventListener('input', checkInput);
