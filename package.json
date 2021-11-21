@@ -26,6 +26,10 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "@vimeo/player": "^2.16.2",
+    "i": "^0.3.7",
+    "lodash.throttle": "^4.1.1",
+    "npm": "^8.1.4",
     "simplelightbox": "^2.10.1"
   }
 }
