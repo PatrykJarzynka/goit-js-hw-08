@@ -1,11 +1,14 @@
-var throttle = require('lodash.throttle');
+let throttle = require('lodash.throttle');
 
 const iframe = document.querySelector('iframe');
 const player = new Vimeo.Player(iframe);
 
-player.on('timeupdate', event => {
-  localStorage.setItem('videoplayer-current-time', event.seconds);
-});
+player.on('timeupdate',
+  throttle(event => {
+    localStorage.setItem('videoplayer-current-time', event.seconds);
+  }, 1000)
+);
+
 
 player.setCurrentTime(localStorage.getItem('videoplayer-current-time')).catch(function (error) {
   switch (error.name) {
@@ -19,4 +22,3 @@ player.setCurrentTime(localStorage.getItem('videoplayer-current-time')).catch(fu
   }
 });
 
-_.throttle(console.log('xd'), 5000);
